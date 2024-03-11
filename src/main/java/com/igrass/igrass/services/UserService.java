@@ -1,17 +1,21 @@
 package com.igrass.igrass.services;
 
-import com.igrass.igrass.entity.Users;
-import org.springframework.stereotype.Service;
+
+import com.igrass.igrass.dto.UserDTO;
 
 import java.util.List;
 
 public interface UserService {
 
-    List<Users> findAll();
+    void createUser(UserDTO userDTO);
 
-    Users findById(Long theId);
+    UserDTO getUserById(Long userId);
 
-    Users save(Users users);
+    List<UserDTO> getAllUsers();
+
+    UserDTO updateUser(UserDTO newUserDTO);
 
     void deleteById(Long theId);
+
+    void deleteAllUsers();
 }

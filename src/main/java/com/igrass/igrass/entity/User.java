@@ -5,14 +5,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.beans.BeanUtils;
 
 @Entity
 @Table(name = "users")
 @Getter
 @Setter
-@NoArgsConstructor
 @ToString
-public class Users {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,9 +28,10 @@ public class Users {
     @Column(name = "email", nullable = false)
     private String email;
 
-    public Users(String username, String password, String email) {
-        this.username = username;
-        this.password = password;
-        this.email = email;
+    public User(com.igrass.igrass.dto.UserDTO userDTO){
+        BeanUtils.copyProperties(userDTO, this);
+    }
+
+    public User() {
     }
 }
