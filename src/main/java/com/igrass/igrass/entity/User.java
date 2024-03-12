@@ -1,5 +1,6 @@
 package com.igrass.igrass.entity;
 
+import com.igrass.igrass.enums.UserRole;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,6 +28,12 @@ public class User {
 
     @Column(name = "email", nullable = false)
     private String email;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role", nullable = false)
+    private UserRole role;
+
+
 
     public User(com.igrass.igrass.dto.UserDTO userDTO){
         BeanUtils.copyProperties(userDTO, this);
