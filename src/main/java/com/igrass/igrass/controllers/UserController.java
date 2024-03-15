@@ -5,30 +5,45 @@ import com.igrass.igrass.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/users")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @GetMapping()
-    public ResponseEntity<List<UserDTO>> getAllUsers(){
+    @GetMapping("/list")
+    public String getAllUsers(Model model){
         List<UserDTO> users = userService.getAllUsers();
-        return ResponseEntity.ok(users);
+        model.addAttribute("userDTO", users);
+        return "users/user-list";
+    }
+
+    @GetMapping("/showFormForAdd")
+    public String showFormForAdd(Model theModel){
+
+        // create model attribute to bind form data
+        UserDTO theUserDTO = new UserDTO();
+
+        theModel.addAttribute("userDTO", theUserDTO);
+
+        return "users/user-form";
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserDTO> getUserById(@PathVariable Long id){
+    public String getUserById(@PathVariable Long id, Model model){
         UserDTO user = userService.getUserById(id);
         if (user != null) {
-            return ResponseEntity.ok(user);
+            model.addAttribute("userDTO", user);
+            return "users/user-details";
         } else {
-            return ResponseEntity.notFound().build();
+            return "redirect:/user/list";
         }
     }
 

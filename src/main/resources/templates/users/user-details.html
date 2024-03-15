@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalhes do Usuário</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .user-details {
+            width: 50%;
+            margin: 20px auto;
+            background-color: #fff;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .detail-label {
+            font-weight: bold;
+        }
+
+        .detail-value {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="user-details">
+    <h1>Detalhes do Usuário</h1>
+    <div>
+        <span class="detail-label">ID:</span>
+        <span class="detail-value" th:text="${userDTO.userId}"></span>
+    </div>
+    <div>
+        <span class="detail-label">Nome:</span>
+        <span class="detail-value" th:text="${userDTO.username}"></span>
+    </div>
+    <div>
+        <span class="detail-label">Email:</span>
+        <span class="detail-value" th:text="${userDTO.email}"></span>
+    </div>
+    <div>
+        <span class="detail-label">Role:</span>
+        <span class="detail-value" th:text="${userDTO.role}"></span>
+    </div>
+    <div>
+        <span class="detail-label">Order:</span>
+        <span class="detail-value" th:text="${userDTO.orders}"></span>
+    </div>
+</div>
+</body>
+</html>
