@@ -40,9 +40,6 @@ public class User {
     @Column(name = "role", nullable = false)
     private UserRole role;
 
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Order> orders = new ArrayList<>();
-
     public User(com.igrass.igrass.dto.UserDTO userDTO){
         BeanUtils.copyProperties(userDTO, this);
     }

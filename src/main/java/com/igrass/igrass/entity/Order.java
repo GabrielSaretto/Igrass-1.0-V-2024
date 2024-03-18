@@ -1,5 +1,6 @@
 package com.igrass.igrass.entity;
 
+import com.igrass.igrass.dto.UserDTO;
 import com.igrass.igrass.enums.OrderStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -40,6 +41,6 @@ public class Order {
         BeanUtils.copyProperties(orderDTO, this);
     }
 
-    public Order(){
+    public Order() {
     }
 }
