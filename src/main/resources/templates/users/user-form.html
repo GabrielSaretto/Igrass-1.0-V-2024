@@ -28,19 +28,21 @@
         <input type="text" th:field="*{username}"
                class="form-control mb-4 w-25" placeholder="Username">
 
-        <input type="text" th:field="*{email}"
-               class="form-control mb-4 w-25" placeholder="Email">
+        <input type="text" th:field="*{password}"
+               class="form-control mb-4 w-25" placeholder="Password">
 
         <input type="text" th:field="*{email}"
                class="form-control mb-4 w-25" placeholder="Email">
 
-        <input type="text" th:field="*{role}"
-               class="form-control mb-4 w-25" placeholder="UserRole">
+        <select th:field="*{role}" class="form-control mb-4 w-25" id="role">
+            <option value="PROVIDER">PROVIDER</option>
+            <option value="CLIENT">CLIENT</option>
+        </select>
 
         <button type="submit" class="btn btn-info col-2">Save</button>
 
         <hr>
-        <a th:href="@{/users}">Back to Users List</a>
+        <a th:href="@{/userList}" class="btn btn-secondary mt-3">Back to Users List</a>
 
     </form>
 

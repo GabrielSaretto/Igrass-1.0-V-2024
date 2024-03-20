@@ -1,6 +1,8 @@
 package com.igrass.igrass.controllers;
 
+import com.igrass.igrass.dto.OrderDTO;
 import com.igrass.igrass.dto.UserDTO;
+import com.igrass.igrass.services.OrderService;
 import com.igrass.igrass.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,13 +14,21 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/users")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @GetMapping("/list")
+    @Autowired
+    private OrderService orderService;
+
+
+    @GetMapping("home")
+    public String home(){
+        return "home";
+    }
+
+    @GetMapping("/userList")
     public String getAllUsers(Model model){
         List<UserDTO> users = userService.getAllUsers();
         model.addAttribute("userDTO", users);
@@ -36,24 +46,24 @@ public class UserController {
         return "users/user-form";
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/userById{id}")
     public String getUserById(@PathVariable Long id, Model model){
-        UserDTO user = userService.getUserById(id);
-        if (user != null) {
-            model.addAttribute("userDTO", user);
-            return "users/user-details";
-        } else {
-            return "redirect:/user/list";
-        }
+        UserDTO userDTO = userService.getUserById(id);
+        List<OrderDTO> orderDTOList = orderService.getOrderByCustomer(id);
+
+        model.addAttribute("userDTO", userDTO);
+        model.addAttribute("orderDTOList", orderDTOList);
+
+        return "users/user-details";
     }
 
-    @PostMapping("/save")
-    public ResponseEntity<String> save(@RequestBody UserDTO theUserDTO){
-        userService.createUser(theUserDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Usuário criado com sucesso");
+    @PostMapping("/saveUser")
+    public String saveUser(@ModelAttribute("userDTO") UserDTO userDTO){
+        userService.createUser(userDTO);
+        return "redirect:/user-list";
     }
 
-    @PutMapping("/update")
+    @PutMapping("/updateUser")
     public ResponseEntity<String> update(@RequestBody UserDTO theUserDTO){
         UserDTO updatedUser = userService.updateUser(theUserDTO);
         if (updatedUser != null) {
@@ -63,13 +73,13 @@ public class UserController {
         }
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/deleteUser/{id}")
     public ResponseEntity<String> delete(@PathVariable("id") Long id){
         userService.deleteById(id);
         return ResponseEntity.ok("Usuário excluído com sucesso");
     }
 
-    @DeleteMapping("/all")
+    @DeleteMapping("/deleteAllUser")
     public ResponseEntity<String> deleteAll(){
         userService.deleteAllUsers();
         return ResponseEntity.ok("Todos os usuários foram excluídos com sucesso");

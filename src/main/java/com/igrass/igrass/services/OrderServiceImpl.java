@@ -4,7 +4,6 @@ import com.igrass.igrass.dao.OrderRepository;
 import com.igrass.igrass.dao.UserRepository;
 import com.igrass.igrass.dto.GrassCuttingJobDTO;
 import com.igrass.igrass.dto.OrderDTO;
-import com.igrass.igrass.dto.UserDTO;
 import com.igrass.igrass.entity.GrassCuttingJob;
 import com.igrass.igrass.entity.Order;
 import com.igrass.igrass.entity.User;
@@ -52,19 +51,12 @@ public class OrderServiceImpl implements OrderService{
         }
     }
 
-
     @Override
     public List<OrderDTO> getOrderByCustomer(Long customerId) {
-        Optional<User> optionalUser = userRepository.findById(customerId);
-        if (optionalUser.isPresent()) {
-            User customer = optionalUser.get();
-            List<Order> orders = orderRepository.findByCustomer(customer);
-            return orders.stream()
-                    .map(OrderDTO::new)
-                    .collect(Collectors.toList());
-        } else {
-            return Collections.emptyList();
-        }
+        List<Order> orders = orderRepository.findByCustomer(userRepository.findById(customerId).orElse(null));
+        return orders.stream()
+                .map(OrderDTO::new)
+                .collect(Collectors.toList());
     }
 
     @Override

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalhes do Usuário</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .section {
+            margin-bottom: 20px;
+        }
+
+        .section h2 {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+
+        .detail-label {
+            font-weight: bold;
+        }
+
+        .detail-item {
+            margin-bottom: 10px;
+        }
+
+        .detail-value {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+</div>
+<div class="section">
+    <h2>Order</h2>
+    <div th:each="order : ${orderDTO}" class="detail-item">
+        <div>
+            <span class="detail-label">Order ID:</span>
+            <span class="detail-value" th:text="${order.orderId}"></span>
+        </div>
+        <div>
+            <span class="detail-label">Request Date:</span>
+            <span class="detail-value" th:text="${order.orderDate}"></span>
+        </div>
+        <div>
+            <span class="detail-label">Order Status:</span>
+            <span class="detail-value" th:text="${order.status}"></span>
+        </div>
+    </div>
+</div>
+<div class="section">
+    <h2>Service</h2>
+    <div th:each="order : ${orderDTO}" class="detail-item">
+        <div>
+            <span class="detail-label">Service ID:</span>
+            <span class="detail-value" th:text="${order.grassCuttingJob.serviceId}"></span>
+        </div>
+        <div>
+            <span class="detail-label">Description:</span>
+            <span class="detail-value" th:text="${order.grassCuttingJob.description}"></span>
+        </div>
+        <div>
+            <span class="detail-label">Price:</span>
+            <span class="detail-value" th:text="${order.grassCuttingJob.price}"></span>
+        </div>
+        <div>
+            <span class="detail-label">Location:</span>
+            <span class="detail-value" th:text="${order.grassCuttingJob.location}"></span>
+        </div>
+    </div>
+</div>
+</body>
+</html>
