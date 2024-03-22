@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Detalhes do Usuário</title>
+    <title>User Details</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -43,6 +43,26 @@
         .detail-value {
             margin-left: 10px;
         }
+
+        /* Estilo para o botão de acordeão */
+        .accordion-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        /* Estilo para o conteúdo do acordeão */
+        .accordion-content {
+            display: none;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-top: none;
+            border-radius: 0 0 5px 5px;
+        }
     </style>
 </head>
 <body>
@@ -67,7 +87,25 @@
             <span class="detail-label">Role:</span>
             <span class="detail-value" th:text="${userDTO.role}"></span>
         </div>
+        <p></p>
+
+        <!-- Botão para expandir os detalhes do pedido -->
+        <button class="accordion-button" onclick="toggleAccordion()">Order Details</button>
+        <div class="accordion-content">
+            <div>
+                <span class="detail-label">Order:</span>
+                <span class="detail-value" th:text="${orderDTO}"></span>
+            </div>
+        </div>
     </div>
 </div>
+
+<script>
+    function toggleAccordion() {
+        var content = document.querySelector('.accordion-content');
+        content.style.display = content.style.display === 'block' ? 'none' : 'block';
+    }
+</script>
+
 </body>
 </html>

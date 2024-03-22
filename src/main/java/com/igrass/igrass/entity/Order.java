@@ -3,6 +3,7 @@ package com.igrass.igrass.entity;
 import com.igrass.igrass.dto.UserDTO;
 import com.igrass.igrass.enums.OrderStatus;
 import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

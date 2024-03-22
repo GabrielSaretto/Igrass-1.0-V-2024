@@ -65,7 +65,7 @@
     </thead>
     <tbody>
     <tr th:each="userDTO : ${userDTO}">
-        <td><a th:href="@{/users/{id}(id=${userDTO.userId})}" th:text="${userDTO.userId}"></a></td>
+        <td><a th:href="@{/userById/{id}(id=${userDTO.userId})}" th:text="${userDTO.userId}"></a></td>
         <td th:text="${userDTO.username}"></td>
         <td th:text="${userDTO.email}"></td>
         <td th:text="${userDTO.role}"></td>
@@ -74,6 +74,7 @@
 </table>
 <div class="text-center">
     <a th:href="@{/showFormForAdd}" class="btn btn-primary mt-3">Create User</a>
+    <a th:href="@{/home}" class="btn btn-primary mt-3">Back to Home</a>
 </div>
 </body>
 </html>

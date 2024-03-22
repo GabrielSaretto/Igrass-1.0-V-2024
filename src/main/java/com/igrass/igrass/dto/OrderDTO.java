@@ -4,6 +4,7 @@ import com.igrass.igrass.entity.GrassCuttingJob;
 import com.igrass.igrass.entity.Order;
 import com.igrass.igrass.entity.User;
 import com.igrass.igrass.enums.OrderStatus;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

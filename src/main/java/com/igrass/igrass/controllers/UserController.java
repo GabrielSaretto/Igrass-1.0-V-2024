@@ -4,6 +4,7 @@ import com.igrass.igrass.dto.OrderDTO;
 import com.igrass.igrass.dto.UserDTO;
 import com.igrass.igrass.services.OrderService;
 import com.igrass.igrass.services.UserService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,9 +23,8 @@ public class UserController {
     @Autowired
     private OrderService orderService;
 
-
-    @GetMapping("home")
-    public String home(){
+    @GetMapping("/home")
+    public String home() {
         return "home";
     }
 
@@ -46,7 +46,7 @@ public class UserController {
         return "users/user-form";
     }
 
-    @GetMapping("/userById{id}")
+    @GetMapping("/userById/{id}")
     public String getUserById(@PathVariable Long id, Model model){
         UserDTO userDTO = userService.getUserById(id);
         List<OrderDTO> orderDTOList = orderService.getOrderByCustomer(id);
